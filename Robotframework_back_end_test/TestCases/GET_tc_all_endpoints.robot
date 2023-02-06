@@ -1,10 +1,13 @@
 *** Settings ***
-Library           SeleniumLibrary
-Library		      ./endpoints/Endpoints.py
+Variables	../endpoints/URL_and_endpoints.py
 
 
-*** Variables ***
-${URL}
+*** Keywords ***
+GET request
+	[Arguments]    ${URL}   ${endpoint}
+	cr   ${URL}    ${endpoint}
 
 
 *** Test Cases ***
+test
+	crea sessione
