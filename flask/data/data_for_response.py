@@ -1,4 +1,4 @@
-import json
+
 
 planet = {
     "name": "Tatooine",

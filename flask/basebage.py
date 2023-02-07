@@ -1,7 +1,10 @@
-from flask import Flask, jsonify, render_template, request
+import random
+import time
+
+from flasc import Flask, jsonify, render_template, request
 import logging
 from data.data_for_response import planet, cosmo_boat, person
-from errors.respons_errors import id_validation, error_404, error_500
+from errors.respons_errors import id_validation, error_404
 
 app = Flask(__name__, template_folder='templates')
 
@@ -51,6 +54,7 @@ def planets(parameter):
 
 @app.route("/starships/<parameter>/")
 def starships(parameter):
+    time.sleep(random.uniform(0, 0.5))
     if parameter.isdigit() or int(parameter) < 0:
         return id_validation(parameter, cosmo_boat)
     else:
