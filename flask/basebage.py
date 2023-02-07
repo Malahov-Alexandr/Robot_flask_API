@@ -1,14 +1,18 @@
 from flask import Flask, jsonify, render_template, request
 import logging
 from data.data_for_response import planet, cosmo_boat, person
-from errors.respons_errors import id_validation, error_404
+from errors.respons_errors import id_validation, error_404, error_500
 
 app = Flask(__name__, template_folder='templates')
 
 
 @app.errorhandler(404)
-def page_not_found():
+def not_found():
     return error_404()
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return jsonify({'error': 'Something went wrong, check the URL, Please check the ID'}), 500
 
 
 @app.before_request
@@ -28,25 +32,29 @@ def home():
     return render_template('index.html')
 
 
-@app.route("/people/<int:parameter>/")
+@app.route("/people/<parameter>/")
 def people(parameter):
-    if not isinstance(parameter, int):
-        return jsonify({"error": f"{parameter} Not Found. id must be int"}), 404
-    return id_validation(parameter, person)
+    if parameter.isdigit() or int(parameter) < 0:
+        return id_validation(parameter, person)
+
+    else:
+        return jsonify({"error": "Not Found. id must be int"}), 404
 
 
-@app.route("/planets/<int:parameter>/")
+@app.route("/planets/<parameter>/")
 def planets(parameter):
-    if not isinstance(parameter, int):
-        return jsonify({"error": f"{parameter} Not Found. id must be int"}), 404
-    return id_validation(parameter, planet)
+    if parameter.isdigit() or int(parameter) < 0:
+        return id_validation(parameter, planet)
+    else:
+        return jsonify({"error": "Not Found. id must be int"}), 404
 
 
-@app.route("/starships/<int:parameter>/")
+@app.route("/starships/<parameter>/")
 def starships(parameter):
-    if not isinstance(parameter, int):
-        return jsonify({"error": f"{parameter} Not Found. id must be int"}), 404
-    return id_validation(parameter, cosmo_boat)
+    if parameter.isdigit() or int(parameter) < 0:
+        return id_validation(parameter, cosmo_boat)
+    else:
+        return jsonify({"error": "Not Found. id must be int "}), 404
 
 
 if __name__ == '__main__':

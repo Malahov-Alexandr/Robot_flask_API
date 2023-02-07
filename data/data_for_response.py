@@ -1,3 +1,5 @@
+import json
+
 planet = {
     "name": "Tatooine",
     "rotation_period": "23",
@@ -96,8 +98,13 @@ cosmo_boat = {
     "url": "https://swapi.dev/api/starships/12/"
 }
 
-must_be_int = {"error": "Not Found. id must be int"}
 
-less_than_0 = {"error": "Not Found. The user’s ID is lower or equal 0"}
 
-more_than_100 = {"error": "Not Found. The user’s ID is higher than 100"}
+
+# must_be_int = {'error': 'Not Found. id must be int'}
+
+less_than_0 = {'error': 'Not Found. The user ID is lower or equal 0'}
+
+more_than_100 = {"error": "Not Found. The user ID is higher than 100"}
+
+error_500 = {"error": "Something went wrong, check the URL, Please check the ID"}
