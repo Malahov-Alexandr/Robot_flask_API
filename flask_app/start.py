@@ -1,4 +1,4 @@
-from basebage import app
+from basepage import app
 
 if __name__ == '__main__':
     app.run()

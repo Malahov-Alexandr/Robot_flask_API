@@ -1,5 +1,3 @@
-
-
 planet = {
     "name": "Tatooine",
     "rotation_period": "23",

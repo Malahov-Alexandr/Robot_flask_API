@@ -1,4 +1,4 @@
-from flask_app import jsonify
+from flask import jsonify
 
 
 def id_validation(parameter, value):

@@ -1,19 +1,21 @@
 *** Settings ***
 Library	RequestsLibrary
 Library  Process
-Library    Telnet
+
 Variables	../endpoints/URL_and_endpoints.py
 Resource    ../Templates/GET_tamplates.robot
-Variables	../../flask/data/data_for_response.py
-Library    perfomance.py
+Variables	../../flask_app/data_for_response.py
+Library    performance.py
+Library    flask
+
 #create a set up method to start the flas app
 
 
 
 *** Variables ***
 ${endpointForPerdomance} = 	people
-${output} = 	${EMPTY}
-
+${value_for_stop} = 	${True}
+${greeting} = 	Hello World!
 
 *** Keywords ***
 Validation Of Json
@@ -26,18 +28,17 @@ Validation Of Json
 	Should Be Equal    ${validResponse.json()} 	${expected_json}
 	Log To Console    Test with ${endpoint} and id ${id} passed
 
-StartApplication
-	Run Process    python3    ../../flask/start.py   shell=True   cwd=../../flask
 
 
-StopApplication
-	Run Process    python3    ../../flask/stop.py  shell=True   cwd=../../flask
+
+Start Server
+	Run Process   python3  ...../flask_app/start.py
 
 
 *** Test Cases ***
 Start Server
-	StartApplication
-	Sleep    3s
+	Start Server
+
 
 *** Test Cases ***
 GetRequestForUsersValidID
@@ -55,11 +56,11 @@ GetRequestForUsersInvalidID
 
 *** Test Cases ***
 Perfomace test
-	perfomance.Run Performance Test		${endpointForPerdomance}	10
+	performance.Run Performance Test		${endpointForPerdomance}	10
 
 *** Test Cases ***
-Stop Server
-	StopApplication
+
+
 
 
 
