@@ -32,8 +32,10 @@ Validation Of Json
 
 
 Start Server
-	Run Process   python3  ...../flask_app/start.py
+	Run Process   python3  ../../flask_app/basepage.py
 
+Server Stop
+    Run Process   python3  ../../flask_app/stop.py
 
 *** Test Cases ***
 Start Server
@@ -59,21 +61,5 @@ Perfomace test
 	performance.Run Performance Test		${endpointForPerdomance}	10
 
 *** Test Cases ***
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+StopServer
+    Server Stop
